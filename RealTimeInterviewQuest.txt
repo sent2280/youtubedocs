@@ -1,0 +1,42 @@
+package YTCode.support;
+
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+/**
+ * Hello world!
+ *
+ */
+public class RealTimeInterviewQuest
+{
+    public static void main( String[] args )
+    {
+    	System.setProperty("webdriver.chrome.driver", "F:\\YoutubeVideoMaker\\SupportingDocs\\driver\\chromedriver.exe");
+
+    	ChromeDriver driver = new ChromeDriver();
+    	
+    	driver.manage().window().maximize();
+    	driver.manage().timeouts().implicitlyWait(60000, TimeUnit.SECONDS);
+    	
+    	driver.get("file:///F:/YoutubeVideoMaker/SupportingDocs/Html/PhoneNumber.html");
+    	String text = driver.findElement(By.xpath("//body/p")).getText();
+    	
+    	Pattern p1 = Pattern.compile("\\d+");
+    	Matcher m1 = p1.matcher(text);
+    	while (m1.find()) {
+    	  System.out.println(m1.group());
+    	}
+     
+    	String text2 = "Totally 5 items included. Total price of your product is $10. Please use the coupon for discounts";
+    	Pattern p2 = Pattern.compile("\\$(\\d+)");
+    	Matcher m2 = p2.matcher(text2);
+    	while (m2.find()) {
+    	  System.out.println(m2.group(1));
+    	}
+    	
+    }
+}
